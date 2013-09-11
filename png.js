@@ -1,7 +1,7 @@
 var fs = require('fs')
+var each = require('each')
 
-var fs = require('fs'),
-    PNG = require('pngjs').PNG;
+var    PNG = require('pngjs').PNG;
 
 function readPng(file, callback) {
 
@@ -32,7 +32,16 @@ fs.createReadStream(file)
 
 }
 
-readPng('test.png', function(sprite) {
+var files = []
+
+for (var i = 2; i < process.argv.length; i++) {
+  files.push(process.argv[i])
+};
+
+each(files)
+.on('item', function(el, idx, next) {
+
+readPng(el, function(sprite) {
   
   var format = ['. ', 'o ']
 
@@ -44,7 +53,10 @@ readPng('test.png', function(sprite) {
     }).join('\n')
 //  }).join('\n\n')
   
-  console.log(sprite)
+  console.log(sprite,'\n')
+  next()
   
+})
+
 })
 
