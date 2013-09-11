@@ -1,5 +1,8 @@
 var fs = require('fs')
 var charm = require('charm')();
+
+var speed = process.argv[3] ? parseInt(process.argv[3]) : 1000;
+
 charm.pipe(process.stdout);
 charm.reset();
 
@@ -39,7 +42,7 @@ readSprites(process.argv[2], function(sprites) {
     if (i == sprites.length) {i = 0}
     charm.position(10, 5)
     drawSpriteConsole(sprites[i++])
-  }, 3000)
+  }, speed)
 })
 
 process.on( 'SIGINT', function() {

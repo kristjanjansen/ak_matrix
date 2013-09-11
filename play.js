@@ -20,6 +20,8 @@ function drawSpriteLc(sprite, lc) {
   });
 }
 
+var speed = process.argv[3] ? parseInt(process.argv[3]) : 1000;
+if (speed < 100) speed = 100 // Less than 100 ms makes LED matrix shutter
 
 board = new five.Board();
 
@@ -48,7 +50,7 @@ board.on("ready", function() {
     setInterval(function() {
       if (i == sprites.length) {i = 0}
       drawSpriteLc(sprites[i++], lc)
-    }, 3000)
+    }, speed)
   })
 
 })
