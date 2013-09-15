@@ -4,12 +4,13 @@ var    PNG = require('pngjs').PNG;
 
 
 function splitSprite(sprite, callback) {
-
+  
+  var size = 8
   var m = {}
   for (var x = 0; x < sprite.length; x++) {
-    for (var y = 0; y < Math.floor(sprite[x].length / 8); y++) {
+    for (var y = 0; y < Math.floor(sprite[x].length / size); y++) {
       if (!m[y]) m[y] = []
-      m[y].push(sprite[x].slice(y * 8, y * 8 + 8))
+      m[y].push(sprite[x].slice(y * size, (y * size) + size))
       
     }
   }
