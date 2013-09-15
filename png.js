@@ -1,7 +1,27 @@
 var fs = require('fs')
-var each = require('each')
 
 var    PNG = require('pngjs').PNG;
+
+
+function splitSprite(sprite, callback) {
+
+  var m = {}
+  for (var x = 0; x < sprite.length; x++) {
+    for (var y = 0; y < Math.floor(sprite[x].length / 8); y++) {
+      if (!m[y]) m[y] = []
+      m[y].push(sprite[x].slice(y * 8, y * 8 + 8))
+      
+    }
+  }
+
+  var mm = []
+  for (key in m) {
+    mm.push(m[key])
+  }
+  
+  callback(mm)
+}
+
 
 function readPng(file, callback) {
 
@@ -32,31 +52,24 @@ fs.createReadStream(file)
 
 }
 
-var files = []
 
-for (var i = 2; i < process.argv.length; i++) {
-  files.push(process.argv[i])
-};
-
-each(files)
-.on('item', function(el, idx, next) {
-
-readPng(el, function(sprite) {
+readPng(process.argv[2], function(sprite) {
+  
+  var sprites = splitSprite(sprite, function(sprites) {
   
   var format = ['. ', 'o ']
 
-//  sprites = sprites.map(function(sprite) {
-    sprite = sprite.map(function(row) {
+  sprites = sprites.map(function(sprite) {
+    return sprite.map(function(row) {
       return row.map(function(el) {
         return format[el]
       }).join('')
     }).join('\n')
-//  }).join('\n\n')
+  }).join('\n\n')
   
-  console.log(sprite,'\n')
-  next()
+  console.log(sprites)
   
 })
-
+  
 })
 
