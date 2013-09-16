@@ -12,23 +12,26 @@ fs.readFile(file, 'utf8', function(err, data) {
   })
 }
 
+function mm2pt(value) {
+  return value / 0.35278
+}
 
-function drawSpritePDF(sprite, doc) {
+function drawSpritePDFCircle(sprite, doc) {
   
-  var x = 130;
-  var y = 120;
+  var x = mm2pt(20)
+  var y = mm2pt(20);
   
   sprite.forEach(function(line) {
     for (var i=0; i < line.length; i++) {
       if (line.charAt(i) == '1') {
-        doc.circle(x, y, 22).fill('black')
+        doc.circle(x, y, mm2pt(10)).fill('black')
       } else {
-        doc.circle(x, y, 22).fill('#ddd')
+        doc.circle(x, y, mm2pt(10)).fill('#ddd')
       }
-      x += 50;
+      x += mm2pt(25);
     }
-    x = 130;
-    y += 50;
+    x = mm2pt(20)
+    y += mm2pt(25);
   })
   
   return doc
@@ -36,15 +39,40 @@ function drawSpritePDF(sprite, doc) {
 }
 
 
+function drawSpritePDFRect(sprite, doc) {
+  
+  var x = mm2pt(25)
+  var y = mm2pt(25);
+  
+  sprite.forEach(function(line) {
+    for (var i=0; i < line.length; i++) {
+      if (line.charAt(i) == '1') {
+        doc.rect(x, y, mm2pt(25), mm2pt(25)).fill('black')
+      } else {
+        doc.rect(x, y, mm2pt(25), mm2pt(25)).fill('#fff')
+      }
+      x += mm2pt(20);
+    }
+    x = mm2pt(25)
+    y += mm2pt(20);
+  })
+  
+  return doc
+  
+}
+
 
 readSprites(process.argv[2], function(sprites) {
   
   var doc = new PDFDocument
   doc.fontSize(50)
+  
   sprites.forEach(function(sprite) {
-    doc = drawSpritePDF(sprite, doc)
+    doc = drawSpritePDFRect(sprite, doc)
     doc.addPage()
   })
+  
+  
   doc.save().write(process.argv[2].replace('txt', 'pdf'))
  
 })
