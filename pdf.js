@@ -24,9 +24,9 @@ function drawSpritePDFCircle(sprite, doc) {
   sprite.forEach(function(line) {
     for (var i=0; i < line.length; i++) {
       if (line.charAt(i) == '1') {
-        doc.circle(x, y, mm2pt(10)).fill('black')
+        doc.circle(x, y, mm2pt(11)).fill('black')
       } else {
-        doc.circle(x, y, mm2pt(10)).fill('#ddd')
+        doc.circle(x, y, mm2pt(11)).fill('#ddd')
       }
       x += mm2pt(25);
     }
@@ -68,11 +68,11 @@ readSprites(process.argv[2], function(sprites) {
   doc.fontSize(50)
   
   sprites.forEach(function(sprite) {
-    doc = drawSpritePDFRect(sprite, doc)
+    doc = (process.argv[4] == 'rect') ? drawSpritePDFRect(sprite, doc) : drawSpritePDFCircle(sprite, doc)
     doc.addPage()
   })
   
   
-  doc.save().write(process.argv[2].replace('txt', 'pdf'))
+  doc.save().write(process.argv[3])
  
 })
