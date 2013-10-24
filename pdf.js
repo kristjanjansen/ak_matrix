@@ -41,19 +41,19 @@ function drawSpritePDFCircle(sprite, doc) {
 
 function drawSpritePDFRect(sprite, doc) {
   
-  var x = mm2pt(25)
-  var y = mm2pt(25);
+  var x = mm2pt(20)
+  var y = mm2pt(20);
   
   sprite.forEach(function(line) {
     for (var i=0; i < line.length; i++) {
       if (line.charAt(i) == '1') {
-        doc.rect(x, y, mm2pt(25), mm2pt(25)).fill('black')
+        doc.rect(x, y, mm2pt(20), mm2pt(20)).fill('black')
       } else {
-        doc.rect(x, y, mm2pt(25), mm2pt(25)).fill('#fff')
+        doc.rect(x, y, mm2pt(20), mm2pt(20)).fill('#fff')
       }
       x += mm2pt(20);
     }
-    x = mm2pt(25)
+    x = mm2pt(20)
     y += mm2pt(20);
   })
   
