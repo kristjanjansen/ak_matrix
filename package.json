@@ -1,0 +1,11 @@
+{
+  "name": "ak_matrix",
+  "version": "0.0.0",
+  "description": "",
+  "dependencies": {
+    "weighted": "~0.2.2",
+    "pdfkit": "~0.7.0",
+    "charm": "~1.0.0",
+    "pngjs": "~0.4.0"
+  }
+}

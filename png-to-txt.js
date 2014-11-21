@@ -1,6 +1,6 @@
 var fs = require('fs')
 
-var    PNG = require('pngjs').PNG;
+var PNG = require('pngjs').PNG;
 
 
 function splitSprite(sprite, callback) {
@@ -68,8 +68,8 @@ readPng(process.argv[2], function(sprite) {
     }).join('\n')
   }).join('\n\n')
   
-  console.log(sprites)
-  
+  fs.writeFileSync(process.argv[3], sprites)
+
 })
   
 })

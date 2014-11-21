@@ -65,6 +65,7 @@ function drawSpritePDFRect(sprite, doc) {
 readSprites(process.argv[2], function(sprites) {
   
   var doc = new PDFDocument
+  doc.pipe(fs.createWriteStream(process.argv[3]))
   doc.fontSize(50)
   
   sprites.forEach(function(sprite) {
@@ -72,7 +73,6 @@ readSprites(process.argv[2], function(sprites) {
     doc.addPage()
   })
   
-  
-  doc.save().write(process.argv[3])
+  doc.save().end()
  
 })

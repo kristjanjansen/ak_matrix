@@ -1,5 +1,7 @@
-var sprites = []
+var fs = require('fs')
 var weighted = require('weighted')
+
+var sprites = []
 
 function rnd(weight) {
   weight = parseFloat(weight) || 0.5
@@ -61,5 +63,4 @@ sprites = sprites.map(function(sprite) {
   }).join('\n')
 }).join('\n\n')
 
-
-console.log(sprites)
+fs.writeFileSync(process.argv[2], sprites)
