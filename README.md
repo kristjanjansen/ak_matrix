@@ -1,6 +1,6 @@
 ### About
 
-8x8 matrix based pixel font tools
+8x8 matrix based pixel font conversion tools.
 
 
 ### Installation
